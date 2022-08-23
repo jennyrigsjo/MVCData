@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "People Index";  
+}
+
+@model PeopleViewModel
+
+<h1>People Index</h1>
+
+<form asp-controller="People" asp-action="Search" method="post" class="search people">
+    <fieldset>
+        <legend>Search for people</legend>
+
+        <label for="search">Search term:</label>
+        <input type="text" id="search" name="search" value="@Model.Search" required>
+
+        <input type="submit" name="search" value="Search" class="submit">
+    </fieldset>
+</form>
+
+
+
+<form asp-action="CreatePerson" method="post" class="create person">
+    <fieldset>
+        <legend>Add a person</legend>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+
+        <input type="submit" name="create" value="Create" class="submit">
+    </fieldset>
+</form>
+
+
+
+<table class="table people">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">City</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Person person in Model.People)
+        {
+            <tr class="person">
+                <td>@person.Name</td>
+                <td>@person.Phone</td>
+                <td>@person.City</td>
+                <td><button>Delete</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
