@@ -55,8 +55,8 @@
         <div class="column-header col-xs-3 col-sm-3 col-md-3 col-lg-3">City</div>
         <div class="column-header col-xs-3 col-sm-3 col-md-3 col-lg-3">Action</div>
     </div>
-        @foreach (Person person in Model.People.List)
-        {
-            <partial name="~/Views/Shared/_TableRowPersonPartial.cshtml" model="@person" />
-        }
+    @foreach (Person person in Model.People.List)
+    {
+        <partial name="~/Views/Shared/_TableRowPersonPartial.cshtml" model="@person" />
+    }
 </div>
