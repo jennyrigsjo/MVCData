@@ -1,0 +1,10 @@
+﻿@model Person
+
+<div class="table-row person">
+    <span class="table-data">@Model.Name</span>
+    <span class="table-data">@Model.Phone</span>
+    <span class="table-data">@Model.City</span>
+    <span class="table-data">
+        <a class="delete" asp-controller="People" asp-action="DeletePerson" asp-route-name="@Model.Name">Delete</a>
+    </span>
+</div>

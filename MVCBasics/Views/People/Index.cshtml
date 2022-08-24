@@ -48,8 +48,15 @@
 </form>
 
 
+<section class="table people">
+        @foreach (Person person in Model.People.List)
+        {
+            <partial name="~/Views/Shared/_TableRowPersonPartial.cshtml" model="@person" />
+        }
+</section>
 
-<table class="table people">
+
+@*<table class="table people">
     <thead>
         <tr>
             <th scope="col">Name</th>
@@ -69,4 +76,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
