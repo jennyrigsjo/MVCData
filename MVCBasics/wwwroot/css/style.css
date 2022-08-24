@@ -144,6 +144,19 @@ table.people {
     text-align: left;
 }
 
+form.create.person .error-message ul {
+    color: red;
+}
+
+form.create.person .field {
+    margin-bottom: 1em;
+}
+
+form.create.person label {
+    display: inline-block;
+    min-width: 150px;
+}
+
 
 
 /*** Footer ***/

@@ -2,7 +2,8 @@
     ViewData["Title"] = "People Index";  
 }
 
-@model PeopleViewModel
+@model PCViewModels
+
 
 <h1>People Index</h1>
 
@@ -11,28 +12,38 @@
         <legend>Search for people</legend>
 
         <label for="search">Search term:</label>
-        <input type="text" id="search" name="search" value="@Model.Search" required>
+        <input type="text" id="search" name="search" value="@Model.People.Search" required>
 
-        <input type="submit" name="search" value="Search" class="submit">
+        <input type="submit" name="submit" value="Search" class="submit">
     </fieldset>
 </form>
 
 
 
-<form asp-action="CreatePerson" method="post" class="create person">
+<form asp-controller="People" asp-action="CreatePerson" method="post" class="create person">
+    <div asp-validation-summary="All" class="error-message"></div>
     <fieldset>
         <legend>Add a person</legend>
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <div class="field">
+            <label asp-for="CreatePerson.Name" for="name"></label>
+            <input asp-for="CreatePerson.Name" type="text" id="name" name="name" value="@Model.CreatePerson.Name">
+            <span asp-validation-for="CreatePerson.Name"></span>
+        </div>
 
-        <label for="phone">Phone:</label>
-        <input type="text" id="phone" name="phone" required>
+        <div class="field">
+            <label asp-for="CreatePerson.Phone" for="phone"></label>
+            <input asp-for="CreatePerson.Phone" type="text" id="phone" name="phone" value="@Model.CreatePerson.Phone">
+            <span asp-validation-for="CreatePerson.Phone"></span>
+        </div>
 
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required>
+        <div class="field">
+            <label asp-for="CreatePerson.City" for="city"></label>
+            <input asp-for="CreatePerson.City" type="text" id="city" name="city" value="@Model.CreatePerson.City">
+            <span asp-validation-for="CreatePerson.City"></span>
+        </div>
 
-        <input type="submit" name="create" value="Create" class="submit">
+        <input type="submit" name="submit" value="Create" class="submit">
     </fieldset>
 </form>
 
@@ -48,13 +59,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Person person in Model.People)
+        @foreach (Person person in Model.People.List)
         {
             <tr class="person">
                 <td>@person.Name</td>
                 <td>@person.Phone</td>
                 <td>@person.City</td>
-                <td><button>Delete</button></td>
+                <td><a class="delete" asp-controller="People" asp-action="DeletePerson" asp-route-name=@person.Name>Delete</a></td>
             </tr>
         }
     </tbody>

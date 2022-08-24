@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MVCBasics.Models;
 using MVCBasics.ViewModels;
 
@@ -6,34 +7,57 @@ namespace MVCBasics.Controllers
 {
     public class PeopleController : Controller
     {
+
+        [HttpGet]
         public IActionResult Index()
         {
-            PeopleViewModel viewModel = new();
-            return View(viewModel);
+            PCViewModels viewModels = new();
+            return View(viewModels);
         }
 
 
         [HttpPost]
         public IActionResult Search(string search)
         {
+            PCViewModels viewModels = new()
+            {
+                People = PeopleModel.Search(search)
+            };
 
-            PeopleViewModel viewModel = People.Search(search);
-            return View("Index", viewModel);
+            return View("Index", viewModels);
         }
 
 
+        [HttpPost]
         public IActionResult CreatePerson(CreatePersonViewModel person)
         {
+            PCViewModels viewModels = new();
+
             if (ModelState.IsValid)
             {
-                // Create person...
+                viewModels.People = PeopleModel.CreatePerson(person);
             }
             else
             {
-                // Check ModelState.Errors property
+                // return supplied info to view to keep form fields filled in
+                viewModels.CreatePerson.Name = person.Name;
+                viewModels.CreatePerson.Phone = person.Phone;
+                viewModels.CreatePerson.City = person.City;
             }
 
-            return View("Index");
+            return View("Index", viewModels);
+        }
+
+
+        [HttpGet]
+        public IActionResult DeletePerson(string name)
+        {
+            PCViewModels viewModels = new()
+            {
+                People = PeopleModel.DeletePerson(name)
+            };
+
+            return View("Index", viewModels);
         }
     }
 }

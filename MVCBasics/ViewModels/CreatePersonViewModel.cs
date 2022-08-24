@@ -5,7 +5,7 @@ namespace MVCBasics.ViewModels
     public class CreatePersonViewModel
     {
         [Required]
-        [Display(Name = "Full name")]
+        [Display(Name = "First and last name")]
         public string Name { get; set; } = string.Empty;
 
         [Required]
