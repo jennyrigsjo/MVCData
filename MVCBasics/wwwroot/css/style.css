@@ -144,6 +144,10 @@ table.people {
     text-align: left;
 }
 
+.table.people .column-headers {
+    font-weight: bold;
+}
+
 form.create.person .error-message ul {
     color: red;
 }
