@@ -11,7 +11,11 @@ namespace MVCBasics.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            PCViewModels viewModels = new();
+            PCViewModels viewModels = new()
+            {
+                People = PeopleModel.List()
+            };
+
             return View(viewModels);
         }
 
