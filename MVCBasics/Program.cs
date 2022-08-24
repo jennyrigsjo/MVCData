@@ -22,29 +22,9 @@ var cultureInfo = new CultureInfo("en-US");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "",
-    defaults: new { controller = "Home", action = "About" }
-    );
-
-app.MapControllerRoute(
-    name: "about",
-    pattern: "about",
-    defaults: new { controller = "Home", action = "About" }
-    );
-
-app.MapControllerRoute(
-    name: "contact",
-    pattern: "contact",
-    defaults: new { controller = "Home", action = "Contact" }
-    );
-
-app.MapControllerRoute(
-    name: "projects",
-    pattern: "projects",
-    defaults: new { controller = "Home", action = "Projects" }
+    pattern: "{controller=Home}/{action=About}/{id?}" //Add default pattern to enable linking to pages by referencing controller and action names 
     );
 
 app.MapControllerRoute(
@@ -57,24 +37,6 @@ app.MapControllerRoute(
     name: "guessinggame",
     pattern: "guessinggame",
     defaults: new { controller = "GuessNumber", action = "GuessNumber" }
-    );
-
-app.MapControllerRoute(
-    name: "guessinggame/delete-cookies",
-    pattern: "guessinggame/delete-cookies",
-    defaults: new { controller = "GuessNumber", action = "DeleteCookies" }
-    );
-
-app.MapControllerRoute(
-    name: "guessinggame/delete-session",
-    pattern: "guessinggame/delete-session",
-    defaults: new { controller = "GuessNumber", action = "DeleteSession" }
-    );
-
-app.MapControllerRoute(
-    name: "people",
-    pattern: "people",
-    defaults: new { controller = "People", action = "Index" }
     );
 
 app.Run();
