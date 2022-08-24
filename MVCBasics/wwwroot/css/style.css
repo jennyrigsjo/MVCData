@@ -139,15 +139,6 @@ form.create.person {
     margin-bottom: 3em;
 }
 
-table.people {
-    width: 100%;
-    text-align: left;
-}
-
-.table.people .column-headers {
-    font-weight: bold;
-}
-
 form.create.person .error-message ul {
     color: red;
 }
@@ -161,6 +152,9 @@ form.create.person label {
     min-width: 150px;
 }
 
+.table.people .column-headers {
+    font-weight: bold;
+}
 
 
 /*** Footer ***/
