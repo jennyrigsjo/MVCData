@@ -54,11 +54,12 @@ namespace MVCBasics.Controllers
 
 
         [HttpGet]
-        public IActionResult DeletePerson(string name)
+        public IActionResult DeletePerson(int id)
         {
             PCViewModels viewModels = new()
             {
-                People = PeopleModel.DeletePerson(name)
+                //People = PeopleModel.DeletePerson(name)
+                People = PeopleModel.DeletePerson(id)
             };
 
             return View("Index", viewModels);

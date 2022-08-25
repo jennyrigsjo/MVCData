@@ -30,7 +30,8 @@ namespace MVCBasics.Models
 
         public static PeopleViewModel CreatePerson(CreatePersonViewModel person)
         {
-            Person newPerson = new(person.Name, person.Phone, person.City);
+            int newID = PeopleData.GenerateNewID();
+            Person newPerson = new(person.Name, person.Phone, person.City, newID);
 
             PeopleData.List.Add(newPerson);
 
@@ -43,9 +44,10 @@ namespace MVCBasics.Models
         }
 
 
-        public static PeopleViewModel DeletePerson(string name)
+        public static PeopleViewModel DeletePerson(int id)
         {
-            var person = PeopleData.List.FirstOrDefault(person => person.Name.ToLower() == name.ToLower());
+            //var person = PeopleData.List.FirstOrDefault(person => person.Name.ToLower() == name.ToLower());
+            var person = PeopleData.List.FirstOrDefault(person => person.ID == id);
 
             if (person != null)
             {
