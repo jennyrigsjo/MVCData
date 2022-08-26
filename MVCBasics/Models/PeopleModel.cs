@@ -28,6 +28,34 @@ namespace MVCBasics.Models
         }
 
 
+        public static PeopleViewModel GetPerson(int id = 0)
+        {
+            PeopleViewModel viewModel = new();
+            var person = PeopleData.List.Find(person => person.ID == id);
+
+            if (id == 0)
+            {
+                viewModel.Message = "Please provide an ID.";
+                viewModel.StatusCode = 400;
+            }
+
+            else if (person == null)
+            {
+                viewModel.Message = $"Item with ID '{id}' does not exist.";
+                viewModel.StatusCode = 400;
+            }
+
+            else
+            {
+                viewModel.Message = $"Successfully retrieved item with ID '{id}'.";
+                viewModel.StatusCode = 200;
+                viewModel.List.Add(person);
+            }
+
+            return viewModel;
+        }
+
+
         public static PeopleViewModel CreatePerson(CreatePersonViewModel person)
         {
             int newID = PeopleData.GenerateNewID();
@@ -44,20 +72,32 @@ namespace MVCBasics.Models
         }
 
 
-        public static PeopleViewModel DeletePerson(int id)
+        public static PeopleViewModel DeletePerson(int id = 0)
         {
-            //var person = PeopleData.List.FirstOrDefault(person => person.Name.ToLower() == name.ToLower());
+            PeopleViewModel viewModel = new();
             var person = PeopleData.List.FirstOrDefault(person => person.ID == id);
 
-            if (person != null)
+            if (id == 0)
             {
-                PeopleData.List.Remove(person);
+                viewModel.List = PeopleData.List;
+                viewModel.Message = "Please provide an ID.";
+                viewModel.StatusCode = 400;
             }
 
-            PeopleViewModel viewModel = new()
+            else if (person == null)
             {
-                List = PeopleData.List
-            };
+                viewModel.List = PeopleData.List;
+                viewModel.Message = $"Item with ID '{id}' could not be deleted because it does not exist.";
+                viewModel.StatusCode = 400;
+            }
+
+            else
+            {
+                bool success = PeopleData.List.Remove(person);
+                viewModel.List = PeopleData.List;
+                viewModel.Message = success ? $"Item with ID '{id}' has been successfully deleted." : $"Item with ID '{id}' exists but it could not be deleted.";
+                viewModel.StatusCode = success ? 200 : 400;
+            }
 
             return viewModel;
         }

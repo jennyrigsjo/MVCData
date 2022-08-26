@@ -58,7 +58,6 @@ namespace MVCBasics.Controllers
         {
             PCViewModels viewModels = new()
             {
-                //People = PeopleModel.DeletePerson(name)
                 People = PeopleModel.DeletePerson(id)
             };
 

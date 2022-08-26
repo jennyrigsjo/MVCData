@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "AJAX SPA";
+}
+
+<h1>SPA (Single Page Application) using AJAX</h1>
+
+<div class="spa-actions">
+    <button onclick="GetPeopleList()">People</button>
+
+    <form method="post" id="spaForm">
+        <label for="id">Enter ID:</label>
+        <input type="text" name="id" id="id" />
+
+        <input type="submit" name="action" id="details" value="Details" />
+        <input type="submit" name="action" id="delete" value="Delete" />
+    </form>
+</div>
+
+<div id="spaResult"></div>
