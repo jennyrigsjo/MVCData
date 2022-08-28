@@ -48,6 +48,12 @@ function GetPeopleList() {
 
 function GetPerson(id) {
 
+    if (id == "")
+    {
+        PrintResult("Please provide an ID.");
+        return;
+    }
+
     let url = `/Ajax/GetPerson/${id}`;
 
     $.ajax({
@@ -65,6 +71,12 @@ function GetPerson(id) {
 
 
 function DeletePerson(id) {
+
+    if (id == "")
+    {
+        PrintResult("Please provide an ID.");
+        return;
+    }
 
     let url = `/Ajax/DeletePerson/${id}`;
 

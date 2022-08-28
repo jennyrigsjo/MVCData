@@ -188,8 +188,3 @@ form.create.person label {
     justify-content: space-between;
     margin-bottom: 2em;
 }
-
-.status-code-message .heading {
-    font-weight: bold;
-    margin-bottom: 1em;
-}

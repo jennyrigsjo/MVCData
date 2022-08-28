@@ -1,4 +1,4 @@
-﻿namespace MVCBasics.ViewModels
+﻿namespace MVCBasics.Models
 {
     public class Person
     {

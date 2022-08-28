@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MVCBasics.Models;
 using MVCBasics.ViewModels;
 
@@ -11,9 +10,12 @@ namespace MVCBasics.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            PCViewModels viewModels = new()
+            ViewModelsContainer viewModels = new()
             {
-                People = PeopleModel.List()
+                People = new PeopleViewModel()
+                {
+                    List = PeopleModel.List()
+                }
             };
 
             return View(viewModels);
@@ -23,9 +25,13 @@ namespace MVCBasics.Controllers
         [HttpPost]
         public IActionResult Search(string search)
         {
-            PCViewModels viewModels = new()
+            ViewModelsContainer viewModels = new()
             {
-                People = PeopleModel.Search(search)
+                People = new PeopleViewModel()
+                {
+                    Search = search,
+                    List = PeopleModel.Search(search)
+                }
             };
 
             return View("Index", viewModels);
@@ -35,11 +41,15 @@ namespace MVCBasics.Controllers
         [HttpPost]
         public IActionResult CreatePerson(CreatePersonViewModel person)
         {
-            PCViewModels viewModels = new();
+            ViewModelsContainer viewModels = new()
+            {
+                People = new PeopleViewModel(),
+                CreatePerson = new CreatePersonViewModel()
+            };
 
             if (ModelState.IsValid)
             {
-                viewModels.People = PeopleModel.CreatePerson(person);
+                PeopleModel.CreatePerson(person);
             }
             else
             {
@@ -49,17 +59,22 @@ namespace MVCBasics.Controllers
                 viewModels.CreatePerson.City = person.City;
             }
 
+            viewModels.People.List = PeopleModel.List();
             return View("Index", viewModels);
         }
 
 
         [HttpGet]
-        public IActionResult DeletePerson(int id)
+        public IActionResult DeletePerson(int id = 0)
         {
-            PCViewModels viewModels = new()
+            ViewModelsContainer viewModels = new()
             {
-                People = PeopleModel.DeletePerson(id)
+                People = new PeopleViewModel()
             };
+
+            PeopleModel.DeletePerson(id);
+
+            viewModels.People.List = PeopleModel.List();
 
             return View("Index", viewModels);
         }

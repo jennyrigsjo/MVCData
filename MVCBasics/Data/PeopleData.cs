@@ -1,4 +1,4 @@
-﻿using MVCBasics.ViewModels;
+﻿using MVCBasics.Models;
 
 namespace MVCBasics.Data
 {

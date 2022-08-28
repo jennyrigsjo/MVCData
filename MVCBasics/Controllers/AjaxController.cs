@@ -14,27 +14,37 @@ namespace MVCBasics.Controllers
 
         public IActionResult PeopleList()
         {
-            PeopleViewModel viewModel = PeopleModel.List();
+            PeopleViewModel viewModel = new()
+            {
+                List = PeopleModel.List()
+            };
+
             return View("_PeopleList", viewModel);
         }
 
 
         [HttpPost]
-        public IActionResult GetPerson(int id)
+        public IActionResult GetPerson(int id = 0)
         {
-            PeopleViewModel viewModel = PeopleModel.GetPerson(id);
+            PeopleViewModel viewModel = new()
+            {
+                List = PeopleModel.GetPerson(id)
+            };
+
             return View("_PersonDetails", viewModel);
         }
 
 
         [HttpPost]
-        public IActionResult DeletePerson(int id)
+        public IActionResult DeletePerson(int id = 0)
         {
-            PeopleViewModel viewModel = PeopleModel.DeletePerson(id);
-
-            if (viewModel.StatusCode == 400) 
+            if (id == 0)
             {
                 return BadRequest(); // Setting status code to anything other than 2** will trigger the 'error' part of the javascript/ajax call.
+            }
+            else if (!PeopleModel.DeletePerson(id))
+            {
+                return NotFound();
             }
             else
             {
